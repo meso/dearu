@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<title>である - 政剣マニフェスティア専用ブラウザ</title>
+<link rel="stylesheet" href="css/photon.min.css">
+<div class="window">
+  <div class="window-content">
+    <div class="pane" style="width: 1136px; height: 640px;">
+      <webview id="main" style="width: 1136px; height: 640px;"
+        src="http://www.dmm.com/netgame/social/-/gadgets/=/app_id=763917/"
+        useragent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.116 Safari/537.36"
+        preload="javascripts/inspect.js" disablewebsecurity>
+    </div>
+  </div>
+  <footer class="toolbar toolbar-footer">
+    <h1 class="title">モチベ全回復予定時刻: <span id="stamimax"></span></h1>
+  </footer>
+</div>
+<script>
+  const webview = document.getElementById('main');
+  webview.addEventListener('ipc-message', function(event) {
+    const message = event.args[0];
+    switch(event.channel){
+      case "stamimax":
+        document.getElementById('stamimax').innerHTML = message;
+        break;
+      case "staminow":
+//          document.getElementById('staminow').innerHTML = message;
+        break;
+    }
+  });
+</script>
